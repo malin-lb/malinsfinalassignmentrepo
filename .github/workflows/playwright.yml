@@ -8,6 +8,8 @@ on:
     types: [run_e2e]
 jobs:
   test:
+    env:
+      PASSWORD: ${{ secrets.STORE_PASSWORD }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
