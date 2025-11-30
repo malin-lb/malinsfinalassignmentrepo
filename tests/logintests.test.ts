@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+
+test('consumer can log in successfully', async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.goto();
+    await login.login('markus', 'sup3rs3cr3t', 'consumer');
+
+    await expect(page).toHaveURL(/\/store/i);
+});
+
+test('shows an error with invalid credentials', async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.goto();
+    await login.login('markus', 'wrongpassword', 'consumer');
+
+    await expect(page.getByTestId('error-message')).toContainText('Incorrect password');
+});
+ 
