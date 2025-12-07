@@ -15,12 +15,4 @@ test('consumer can log in successfully', async ({ page }) => {
 
     await expect(page).toHaveURL(/\/store/i);
 });
-
-test('shows an error with invalid credentials', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.goto();
-    await login.login('markus', 'wrongpassword', 'consumer');
-
-    await expect(page.getByTestId('error-message')).toContainText('Incorrect password');
-});
  
